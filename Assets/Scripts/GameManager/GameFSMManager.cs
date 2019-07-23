@@ -13,6 +13,8 @@ public class GameFSMManager : MonoBehaviour {
 
 	public static GameFSMManager instance;
 
+    public List<GameObject> units;
+
 	void Awake() {
 		instance = this;
         states.Add(GameState.READY, GetComponent<GameREADY>());
@@ -20,7 +22,9 @@ public class GameFSMManager : MonoBehaviour {
 	}
 
 	void Start () {
+        units = FindUnits();
 		SetState(startState);
+
 	}
     
     
@@ -43,4 +47,11 @@ public class GameFSMManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public List<GameObject> FindUnits() {
+        List<GameObject> gameObjects = new List<GameObject>();
+        gameObjects.AddRange(GameObject.FindGameObjectsWithTag("Ally"));
+        gameObjects.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        return gameObjects;
+    }
 }

@@ -16,7 +16,6 @@ public class UnitATTACK : UnitFSMState {
 	void Update () {
         if (manager.target != null)
         {
-            print(Vector3.Distance(this.transform.position, manager.target.transform.position));
             if (Vector3.Distance(this.transform.position, manager.target.transform.position) >= 2.5f)
             {
 

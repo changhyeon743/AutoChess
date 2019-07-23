@@ -13,8 +13,10 @@ public class GameRUN : GameFSMState {
 		timeLeft = time;
 		Invoke("DecreaseTime",0f);
 
-		foreach ( GameObject obj in GameObject.FindGameObjectsWithTag("Unit") ) {
-			obj.GetComponent<UnitFSMManager>().SetState(UnitState.MOVE);
+		foreach ( GameObject obj in manager.FindUnits()) {
+			UnitFSMManager unit = obj.GetComponent<UnitFSMManager>();
+            unit.SetState(UnitState.READY);
+            unit.stat.origin = unit.transform.position;
 		}
 
 		Camera.main.backgroundColor = backgroundColor;

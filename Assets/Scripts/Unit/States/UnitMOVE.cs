@@ -1,0 +1,40 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class UnitMOVE : UnitFSMState
+{
+
+    public override void BeginState()
+    {
+        
+
+    }
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (manager.target != null)
+        {
+            if (Vector3.Distance(this.transform.position, manager.target.transform.position) <= manager.stat.attackRange)
+            {
+                manager.SetState(UnitState.ATTACK);
+            }
+            else
+            {
+                SRUtil.SRMove(manager.cc, this.transform, manager.target.transform.position, manager.stat.moveSpeed, manager.stat.rotateSpeed, manager.stat.fallSpeed);
+            }
+
+        }
+    }
+
+   
+
+
+
+}

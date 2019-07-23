@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class UnitIDLE : UnitFSMState {
 	public override void BeginState() {
-        if (manager.origin != null)
+		
+
+        if (manager.stat.origin != Vector3.zero)
         {
-            //this.transform.position = manager.origin;
+            this.transform.position = manager.stat.origin;
         }
 	}
 	// Use this for initialization

@@ -11,14 +11,17 @@ public class GameREADY : GameFSMState {
 		base.BeginState();
 		timeLeft = time;
 		Invoke("DecreaseTime",0f);
-
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Unit"))
+		
+        foreach (GameObject obj in manager.units)
         {
             UnitFSMManager unit = obj.GetComponent<UnitFSMManager>();
+			unit.gameObject.SetActive(true);
+			unit.target = null;
+			unit.stat.currentHp = unit.stat.hp;
             unit.SetState(UnitState.IDLE);
-            unit.origin = unit.transform.position;
+            
         }
-
+		manager.units = manager.FindUnits();
 		Camera.main.backgroundColor = backgroundColor;
 	}
 

@@ -6,7 +6,8 @@ public enum UnitState
     IDLE = 0,
     MOVE,
 	ATTACK,
-	DEAD
+	DEAD,
+    READY
 }
 
 public class UnitFSMState : MonoBehaviour {
