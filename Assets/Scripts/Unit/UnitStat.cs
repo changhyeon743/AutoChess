@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class UnitStat : MonoBehaviour
 {
+    public UnitType type;
+    public string name;
     public float moveSpeed;
     public float fallSpeed;
     public float rotateSpeed;
     public float attackRange;
     public float power;
+    public int price;
 
     [SerializeField]
     private float _attackSpeed = 1;
@@ -31,6 +35,8 @@ public class UnitStat : MonoBehaviour
 
     public Vector3 origin;
 
+    public HPBarManager hpBar;
+
     private void Awake()
     {
         manager = GetComponent<UnitFSMManager>();
@@ -38,7 +44,6 @@ public class UnitStat : MonoBehaviour
 
 	// Use this for initialization
 	void Start () {
-        currentHp = hp;
         manager.anim.SetFloat("AttackSpeed",attackSpeed);
 	}
 

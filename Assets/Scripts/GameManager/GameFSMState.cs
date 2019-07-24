@@ -6,7 +6,9 @@ using UnityEngine;
 public enum GameState
 {
     READY = 0,
-    RUN
+    RUN,
+    WIN,
+    LOSE
 }
 
 public class GameFSMState : MonoBehaviour {

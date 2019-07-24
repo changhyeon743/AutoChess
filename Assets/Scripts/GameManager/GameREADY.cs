@@ -4,24 +4,37 @@ using UnityEngine;
 
 public class GameREADY : GameFSMState {
 	public int time = 15;
-	private int timeLeft;
+	public int timeLeft;
 
 	public Color backgroundColor;
 	public override void BeginState() {
 		base.BeginState();
 		timeLeft = time;
-		Invoke("DecreaseTime",0f);
-		
+        DecreaseTime();
+
+        foreach (GameObject obj in manager.FindEnemies())
+        {
+            Destroy(obj.GetComponent<UnitFSMManager>().stat.hpBar.gameObject);
+            Destroy(obj);
+        }
+
         foreach (GameObject obj in manager.units)
         {
             UnitFSMManager unit = obj.GetComponent<UnitFSMManager>();
-			unit.gameObject.SetActive(true);
-			unit.target = null;
-			unit.stat.currentHp = unit.stat.hp;
-            unit.SetState(UnitState.IDLE);
-            
+            unit.gameObject.SetActive(true);
+            unit.stat.currentHp = unit.stat.hp;
+
+            if (unit.stat.type == UnitType.ENEMY)
+            {
+                Destroy(unit.gameObject);
+            }
         }
-		manager.units = manager.FindUnits();
+
+        manager.stageManager.currentStage++;
+
+        manager.units = manager.FindAllies();
+
+
 		Camera.main.backgroundColor = backgroundColor;
 	}
 

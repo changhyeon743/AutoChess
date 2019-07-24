@@ -21,6 +21,11 @@ public class UnitMOVE : UnitFSMState
     {
         if (manager.target != null)
         {
+            if (manager.target.activeSelf == false)
+            {
+                manager.SetState(UnitState.READY);
+                return;
+            }
             if (Vector3.Distance(this.transform.position, manager.target.transform.position) <= manager.stat.attackRange)
             {
                 manager.SetState(UnitState.ATTACK);
@@ -30,6 +35,10 @@ public class UnitMOVE : UnitFSMState
                 SRUtil.SRMove(manager.cc, this.transform, manager.target.transform.position, manager.stat.moveSpeed, manager.stat.rotateSpeed, manager.stat.fallSpeed);
             }
 
+        }
+        else
+        {
+            manager.SetState(UnitState.READY);
         }
     }
 

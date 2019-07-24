@@ -5,8 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Unit
-  - Enemy
-  - Ally
+  - ALLY
+  - ENEMY
+  - Canvas
   layers:
   - Default
   - TransparentFX

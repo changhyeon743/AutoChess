@@ -15,14 +15,22 @@ public class GameFSMManager : MonoBehaviour {
 
     public List<GameObject> units;
 
+    public GameUIManager ui;
+    public StageManager stageManager;
+
 	void Awake() {
 		instance = this;
         states.Add(GameState.READY, GetComponent<GameREADY>());
         states.Add(GameState.RUN, GetComponent<GameRUN>());
+        states.Add(GameState.WIN, GetComponent<GameWIN>());
+        states.Add(GameState.LOSE, GetComponent<GameLOSE>());
+
+        ui = GetComponent<GameUIManager>();
+        stageManager = GetComponentInChildren<StageManager>();
 	}
 
 	void Start () {
-        units = FindUnits();
+        units = FindAllies();
 		SetState(startState);
 
 	}
@@ -50,8 +58,22 @@ public class GameFSMManager : MonoBehaviour {
 
     public List<GameObject> FindUnits() {
         List<GameObject> gameObjects = new List<GameObject>();
-        gameObjects.AddRange(GameObject.FindGameObjectsWithTag("Ally"));
-        gameObjects.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        gameObjects.AddRange(GameObject.FindGameObjectsWithTag("ALLY"));
+        gameObjects.AddRange(GameObject.FindGameObjectsWithTag("ENEMY"));
+        return gameObjects;
+    }
+
+    public List<GameObject> FindEnemies()
+    {
+        List<GameObject> gameObjects = new List<GameObject>();
+        gameObjects.AddRange(GameObject.FindGameObjectsWithTag("ENEMY"));
+        return gameObjects;
+    }
+
+    public List<GameObject> FindAllies()
+    {
+        List<GameObject> gameObjects = new List<GameObject>();
+        gameObjects.AddRange(GameObject.FindGameObjectsWithTag("ALLY"));
         return gameObjects;
     }
 }

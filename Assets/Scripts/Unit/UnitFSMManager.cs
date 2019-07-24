@@ -33,11 +33,11 @@ public class UnitFSMManager : MonoBehaviour
 
     public UnitType GetUnitType()
     {
-        if (gameObject.CompareTag("Enemy"))
+        if (gameObject.CompareTag("ENEMY"))
         {
             return UnitType.ENEMY;
         }
-        else if (gameObject.CompareTag("Ally"))
+        else if (gameObject.CompareTag("ALLY"))
         {
             return UnitType.ALLY;
         }
@@ -69,15 +69,19 @@ public class UnitFSMManager : MonoBehaviour
         cc = GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
         stat = GetComponent<UnitStat>();
+        tag = stat.type.ToString();
+
         foreach (SkinnedMeshRenderer mesh in GetComponentsInChildren<SkinnedMeshRenderer>())
         {
             mesh.material = GetMaterial(GetUnitType());
         }
     }
 
+
     void Start()
     {
         SetState(startState);
+        GameFSMManager.instance.ui.MakeHPBar(stat);
     }
 
     public void SetState(UnitState newState)
@@ -97,10 +101,7 @@ public class UnitFSMManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameFSMManager.instance.currentState == GameState.READY && currentState != UnitState.IDLE)
-        {
-            SetState(UnitState.IDLE);
-        }
+        
 
         if (target != null) {
             if (target.activeSelf == false) {
@@ -127,6 +128,16 @@ public class UnitFSMManager : MonoBehaviour
         posX = Input.mousePosition.x - dist.x;
         posY = Input.mousePosition.y - dist.y;
         posZ = Input.mousePosition.z - dist.z;
+    }
+
+    void OnMouseOver()
+    {
+        GameFSMManager.instance.ui.statManager.Goto(stat);
+    }
+
+    void OnMouseExit()
+    {
+        GameFSMManager.instance.ui.statManager.Exit();
     }
 
     void OnMouseDrag()
@@ -168,6 +179,8 @@ public class UnitFSMManager : MonoBehaviour
 
     public void Dead()
     {
+        //Destroy(this);
         SetState(UnitState.DEAD);
     }
+
 }

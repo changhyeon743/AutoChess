@@ -12,11 +12,11 @@ public class UnitREADY : UnitFSMState
         //gameObjects.AddRange(GameObject.FindGameObjectsWithTag("Unit"));
         if (manager.GetUnitType() == UnitType.ENEMY)
         {
-            gameObjects.AddRange(GameObject.FindGameObjectsWithTag("Ally"));
+            gameObjects.AddRange(GameFSMManager.instance.FindAllies());
         }
         else
         {
-            gameObjects.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+            gameObjects.AddRange(GameFSMManager.instance.FindEnemies());
         }
 
         gameObjects.Remove(this.gameObject);
