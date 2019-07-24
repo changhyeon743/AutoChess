@@ -7,15 +7,6 @@ public class UnitDEAD : UnitFSMState {
 	{
         gameObject.SetActive(false);
         return;
-        if (manager.stat.type == UnitType.ENEMY)
-        {
-            Destroy(this.manager.stat.hpBar.gameObject);
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            
-        }
         
         
         //gameObject.SetActive(false);

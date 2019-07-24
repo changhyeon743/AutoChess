@@ -6,6 +6,25 @@ using UnityEngine;
 public class UnitStat : MonoBehaviour
 {
     public UnitType type;
+    [SerializeField]
+    private int _level;
+
+    public int level {
+        get {
+            return _level;
+        }
+        set {
+            if (value > _level) { //레벨업
+                float weight = 1+0.2f*value;
+                GetComponent<Transform>().localScale = new Vector3(weight,weight,weight);
+                moveSpeed *= weight;
+                power *= weight;
+                attackSpeed *= weight;
+            }
+            _level = value;
+            
+        }
+    }
     public string name;
     public float moveSpeed;
     public float fallSpeed;
@@ -24,7 +43,9 @@ public class UnitStat : MonoBehaviour
         }
         set {
             _attackSpeed = value;
-            manager.anim.SetFloat("AttackSpeed",value);
+            if (manager != null) {
+                manager.anim.SetFloat("AttackSpeed",value);
+            }
         }
     }
 
@@ -45,6 +66,7 @@ public class UnitStat : MonoBehaviour
 	// Use this for initialization
 	void Start () {
         manager.anim.SetFloat("AttackSpeed",attackSpeed);
+        level = level;
 	}
 
     public bool ApplyDamageReturnDead(float amount)
@@ -59,5 +81,5 @@ public class UnitStat : MonoBehaviour
 
         return false;
     }
-    
+
 }

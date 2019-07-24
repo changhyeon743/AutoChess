@@ -1219,7 +1219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 846371839789803257}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 0, z: 6}
+  m_LocalPosition: {x: 490.5, y: 276, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 846371840286047146}
@@ -1316,19 +1316,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c78d1ec7b54af425f8ff8d32895a453e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
-  name: "\uCD10\uC2F9\uC774"
-  moveSpeed: 1.6
+  type: 1
+  _level: 0
+  name: "\uCD10\uC2F9"
+  moveSpeed: 2
   fallSpeed: 1
   rotateSpeed: 500
   attackRange: 2.5
   power: 1
-  price: 2
-  _attackSpeed: 1.2
+  price: 3
+  _attackSpeed: 1.1
   hp: 6
-  currentHp: 0
+  currentHp: 6
   manager: {fileID: 0}
   origin: {x: 0, y: 0, z: 0}
+  hpBar: {fileID: 0}
 --- !u!143 &846371839789803256
 CharacterController:
   m_ObjectHideFlags: 0

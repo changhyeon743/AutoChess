@@ -15,6 +15,10 @@ public class GameWIN : GameFSMState
         base.BeginState();
 
         timeLeft = time;
+        manager.money += manager.stageManager.stages[manager.stageManager.currentStage].reward;
+
+        manager.stageManager.currentStage++;
+
         DecreaseTime();
 
         foreach (GameObject obj in manager.FindEnemies())

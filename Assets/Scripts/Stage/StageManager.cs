@@ -18,7 +18,7 @@ public class StageManager : MonoBehaviour
         set
         {
             _currentStage = value;
-            CreateUnits(value);
+            
         }
     }
 
@@ -35,7 +35,11 @@ public class StageManager : MonoBehaviour
             obj.transform.position = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
             UnitStat stat = obj.GetComponent<UnitStat>();
             stat.type = UnitType.ENEMY;
+            stat.tag = stat.type.ToString();
+            stat.manager.SetBodyColor();
             stat.currentHp = stat.hp;
+            
         }
+        
     }
 }

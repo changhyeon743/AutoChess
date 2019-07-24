@@ -71,10 +71,7 @@ public class UnitFSMManager : MonoBehaviour
         stat = GetComponent<UnitStat>();
         tag = stat.type.ToString();
 
-        foreach (SkinnedMeshRenderer mesh in GetComponentsInChildren<SkinnedMeshRenderer>())
-        {
-            mesh.material = GetMaterial(GetUnitType());
-        }
+
     }
 
 
@@ -82,6 +79,15 @@ public class UnitFSMManager : MonoBehaviour
     {
         SetState(startState);
         GameFSMManager.instance.ui.MakeHPBar(stat);
+        SetBodyColor();
+    }
+
+    public void SetBodyColor()
+    {
+        foreach (SkinnedMeshRenderer mesh in GetComponentsInChildren<SkinnedMeshRenderer>())
+        {
+            mesh.material = GetMaterial(GetUnitType());
+        }
     }
 
     public void SetState(UnitState newState)
@@ -101,14 +107,16 @@ public class UnitFSMManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
 
-        if (target != null) {
-            if (target.activeSelf == false) {
+
+        if (target != null)
+        {
+            if (target.activeSelf == false)
+            {
                 target = null;
             }
         }
-        
+
     }
 
 

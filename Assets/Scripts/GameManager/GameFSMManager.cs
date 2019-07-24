@@ -9,14 +9,19 @@ public class GameFSMManager : MonoBehaviour {
     //시작할 때 초기화해줄 상태
     public GameState startState;
 
+    public int money;
+
 	Dictionary<GameState,GameFSMState> states = new Dictionary<GameState,GameFSMState>();
 
 	public static GameFSMManager instance;
 
-    public List<GameObject> units;
+    public List<GameObject> allies;
+    public List<GameObject> enemies;
 
     public GameUIManager ui;
     public StageManager stageManager;
+    public ShopManager shop;
+
 
 	void Awake() {
 		instance = this;
@@ -27,12 +32,14 @@ public class GameFSMManager : MonoBehaviour {
 
         ui = GetComponent<GameUIManager>();
         stageManager = GetComponentInChildren<StageManager>();
+
 	}
 
 	void Start () {
-        units = FindAllies();
+        allies = FindAllies();
+        enemies = FindEnemies();
 		SetState(startState);
-
+        
 	}
     
     

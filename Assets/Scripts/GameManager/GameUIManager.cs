@@ -17,14 +17,15 @@ public class GameUIManager : MonoBehaviour
     void Awake() {
         manager = GetComponentInParent<GameFSMManager>();
         canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
-        
     }
     void Start() { statManager.gameObject.SetActive(false); }
 
     public Text timeLeftText;
+    public Text moneyText;
 
     void Update()
     {
+        moneyText.text = manager.money.ToString()+"원";
         if (manager.currentState == GameState.READY)
         {
             GameREADY ready = GetComponent<GameREADY>();
